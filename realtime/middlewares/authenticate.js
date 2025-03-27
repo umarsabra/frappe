@@ -1,6 +1,7 @@
 const cookie = require("cookie");
 const { get_conf } = require("../../node_utils");
 const { get_url } = require("../utils");
+const axios = require('axios');
 const conf = get_conf();
 
 function authenticate_with_frappe(socket, next) {
@@ -32,11 +33,6 @@ function authenticate_with_frappe(socket, next) {
 	socket.authorization_header = authorization_header;
 
 	socket.frappe_request = (path, args = {}, opts = {}) => {
-		let query_args = new URLSearchParams(args);
-		if (query_args.toString()) {
-			path = path + "?" + query_args.toString();
-		}
-
 		let headers = {};
 		if (socket.authorization_header) {
 			headers["Authorization"] = socket.authorization_header;
@@ -44,15 +40,18 @@ function authenticate_with_frappe(socket, next) {
 			headers["Cookie"] = `sid=${socket.sid}`;
 		}
 
-		return fetch(get_url(socket, path), {
-			...opts,
+		return axios({
+			method: 'GET',
+			url: get_url(socket, path),
+			params: { ...args },
 			headers,
-		});
+			...opts
+		})
 	};
 
 	socket
 		.frappe_request("/api/method/frappe.realtime.get_user_info")
-		.then((res) => res.json())
+		.then((res) => res.data)
 		.then(({ message }) => {
 			socket.user = message.user;
 			socket.user_type = message.user_type;

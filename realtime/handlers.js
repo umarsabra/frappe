@@ -16,7 +16,7 @@ function frappe_handlers(socket) {
 					doctype,
 					name: name || "",
 				})
-				.then((res) => res.json())
+				.then((res) => res.data)
 				.then(({ message }) => {
 					if (message) {
 						resolve();
