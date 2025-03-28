@@ -45,7 +45,7 @@ function authenticate_with_frappe(socket, next) {
 			url: get_url(socket, path),
 			params: { ...args },
 			headers,
-			...opts
+			...opts,
 		});
 	};
 
