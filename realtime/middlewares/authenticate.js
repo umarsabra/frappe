@@ -1,7 +1,7 @@
 const cookie = require("cookie");
 const { get_conf } = require("../../node_utils");
 const { get_url } = require("../utils");
-const axios = require('axios');
+const axios = require("axios");
 const conf = get_conf();
 
 function authenticate_with_frappe(socket, next) {
@@ -41,12 +41,12 @@ function authenticate_with_frappe(socket, next) {
 		}
 
 		return axios({
-			method: 'GET',
+			method: "GET",
 			url: get_url(socket, path),
 			params: { ...args },
 			headers,
 			...opts
-		})
+		});
 	};
 
 	socket
