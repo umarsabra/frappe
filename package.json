@@ -39,7 +39,6 @@
     "air-datepicker": "git+https://github.com/frappe/air-datepicker",
     "autoprefixer": "10",
     "awesomplete": "^1.1.5",
-    "axios": "^1.8.4",
     "bootstrap": "4.6.2",
     "chalk": "^2.3.2",
     "cliui": "^7.0.4",
@@ -93,10 +92,5 @@
   "optionalDependencies": {
     "bufferutil": "^4.0.8",
     "utf-8-validate": "^6.0.3"
-  },
-  "resolutions": {
-    "string-width": "^4.2.3",
-    "strip-ansi": "^6.0.1",
-    "wrap-ansi": "^7.0.0"
   }
 }
